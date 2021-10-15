@@ -1,0 +1,37 @@
+1. Connect to api
+2. Can i get just the region and pct_hospitals_mu?
+	i know i can grab specific year of data by tweaking url,
+	is it possible to tweak it so that i only get the region and pct_hospitals_mu?
+		no, cannot find any info on doing this on their website
+		multiple variations of the url also failed
+3. How can i store the data when i first pull it?
+	json is possibility, but i want to avoid dragging in external libraries like org.json
+	ideally i do it all with plain java, so a string is likely the best option
+4. Cleanse data of extra characters
+	{}, [], etc
+	can i do simple "]" or do i need some regex, and can i do multiple at a time while being easy to read?
+5. Create and populate linkedhashmap
+	regular hashmap is not organized, so use linkedhashmap which is.
+	could also start with regular hashmap when filling in data, then save the sorted version into a linked?
+		only purpose would be better performance, but what is better:
+			importing java.util.hashmap vs making a hashmap instead of linked?
+		just stick to using linkedhashmaps only, that much memory saved not worth the time it would take to look into
+	finding region easy, but how to find the pct_hosp value to go with it?
+		its consistently 12 lines lower than the region value
+			directly getting it that way is the most efficient
+			**vulnerable to changes in the api format
+		while loop until it finds a case of pct_hosp, then add 'region : pct_hosp' values into map
+			less efficient
+			can better accommodate api format changes
+6. Sort the linkedhashmap
+	using collections.reverseorder and .tomap
+	store into a new linkedhashmap, otherwise run into problems with not really being sorted
+7. Print
+8. Revise
+	wrap atleast the connection in try-catch
+		probably should place the whole thing in the block as well
+	check the response code
+	any null pointer cases?
+	close the input streams / connections
+	cut code down on complexity/redundancy without breaking readability
+9. final check 
